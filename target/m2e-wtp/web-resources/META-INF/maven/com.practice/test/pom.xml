@@ -1,0 +1,204 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.practice</groupId>
+  <artifactId>test</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>test</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit-version>3.8.1</junit-version>
+    <spring-version>4.3.11.RELEASE</spring-version>
+    <aspectj-version>1.8.10</aspectj-version>
+    <mybatis.spring-version>1.3.1</mybatis.spring-version>
+    <mysql.java-version>6.0.6</mysql.java-version>
+    <log4j-version>2.8.2</log4j-version>
+    <mybatis.orm-version>3.4.4</mybatis.orm-version>
+    <c3p0-version>0.9.1.2</c3p0-version>
+    <jstl-version>1.2</jstl-version>
+    <javax.servlet-version>3.1.0</javax.servlet-version>
+    <javax.servlet.jsp-version>2.2</javax.servlet.jsp-version>
+    <freemarker-version>2.3.23</freemarker-version>
+    <jackon-version>2.5.2</jackon-version>
+  </properties>
+
+  <dependencies>
+  
+  	<!-- junit 测试 依赖 -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
+    </dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/org.springframework/spring-core 
+    	spring 核心依赖   ioc  aop 支持
+    -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>${spring-version}</version>
+	</dependency>
+	
+	<!-- 
+		https://mvnrepository.com/artifact/org.springframework/spring-webmvc 
+		spring mvc 依赖 
+	-->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${spring-version}</version>
+	</dependency>
+	
+	
+	<!-- 
+		https://mvnrepository.com/artifact/org.aspectj/aspectjweaver 
+		aspectJ AOP 织入器
+	-->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>${aspectj-version}</version>
+	</dependency>
+
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/org.mybatis/mybatis-spring 
+   		mybatis spring 支持依赖
+   	-->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+	    <version>${mybatis.spring-version}</version>
+	</dependency>
+	
+	<!-- 
+		https://mvnrepository.com/artifact/org.springframework/spring-jdbc 
+		spring Java 数据库访问包  提供数据源
+	-->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>${spring-version}</version>
+	</dependency>
+	
+    <!-- 
+    	https://mvnrepository.com/artifact/mysql/mysql-connector-java 
+   		mysql 数据库驱动  用于连接数据库
+   	-->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>${mysql.java-version}</version>
+	</dependency>
+    
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core 
+   		log4j 日志核心依赖
+   	-->
+	<dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-core</artifactId>
+	    <version>${log4j-version}</version>
+	</dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/org.mybatis/mybatis 
+   		mybatis 持久层核心依赖
+   	-->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>${mybatis.orm-version}</version>
+	</dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/c3p0/c3p0 
+   		c3p0 连接池依赖
+	-->
+	<dependency>
+	    <groupId>c3p0</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>${c3p0-version}</version>
+	</dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/javax.servlet/jstl 
+   		jstl 标签依赖支持
+   	-->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>${jstl-version}</version>
+	</dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api 
+   		serlvet 应用容器支持依赖
+   	-->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>${javax.servlet-version}</version>
+	</dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api 
+   	-->
+	<dependency>
+	    <groupId>javax.servlet.jsp</groupId>
+	    <artifactId>jsp-api</artifactId>
+	    <version>${javax.servlet.jsp-version}</version>
+	</dependency>
+    
+    <!-- 
+		https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+		支持 json 传值 避免出现浏览器下载情况
+	 -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackon-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackon-version}</version>
+    </dependency>
+    
+    <!-- 
+    	https://mvnrepository.com/artifact/org.freemarker/freemarker
+    	freemarker 模板类支持
+     -->
+    <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>${freemarker-version}</version>
+    </dependency>
+    
+  </dependencies>
+  
+  	<!-- 指定maven编译方式为jdk1.8版本 -->  
+	<profiles>  
+	    <profile>  
+	        <id>jdk-1.8</id>  
+	        <activation>  
+	            <activeByDefault>true</activeByDefault>  
+	            <jdk>1.8</jdk>  
+	        </activation>  
+	        <properties>  
+	            <maven.compiler.source>1.8</maven.compiler.source>  
+	            <maven.compiler.target>1.8</maven.compiler.target>  
+	            <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
+	        </properties>  
+	    </profile>  
+	</profiles> 
+  
+</project>
