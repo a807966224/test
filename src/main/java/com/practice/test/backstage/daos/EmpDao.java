@@ -13,7 +13,7 @@ import com.practice.test.backstage.beans.Emp;
  * @author Scott
  *
  */
-public interface EmpDao {
+public interface EmpDao{
 	
 	/**
 	 * 获取人员分页集合
@@ -21,9 +21,7 @@ public interface EmpDao {
 	 * @param size  每页显示多少条数据
 	 * @return
 	 */
-	//@Param("skip") Integer skip,@Param("size") Integer size
-//	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpDaoImpl.class,method="getEmpForPage")
-	@Select("select * from emp")
-	public List getEmpForPage();
+	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="getEmpForPage")
+	public List<Emp> getEmpForPage(@Param("skip") Integer skip,@Param("size") Integer size);
 
 }

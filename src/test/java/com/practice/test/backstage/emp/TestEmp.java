@@ -23,13 +23,11 @@ public class TestEmp {
         
         try {
         	
-        	session.selectList("com.practice.test.backstage.daos.EmpDao.getEmpForPage");
+        	EmpDao empDao=session.getMapper(EmpDao.class);
         	
-//        	EmpDao empDao=session.getMapper(EmpDao.class);
-//        	
-//            List<Emp> emps=empDao.getEmpForPage(skip, size);
-//            
-//            Assert.assertEquals(1, emps.size());
+            List<Emp> emps=empDao.getEmpForPage(skip, size);
+            
+            Assert.assertEquals(1, emps.size());
             
         } finally {
         	
