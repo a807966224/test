@@ -24,4 +24,10 @@ public interface EmpDao{
 	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="getEmpForPage")
 	public List<Emp> getEmpForPage(@Param("skip") Integer skip,@Param("size") Integer size);
 
+	/**
+	 * 获取数据数量
+	 * @return
+	 */
+	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="getEmpForCount")
+	public Integer getEmpForCount();
 }

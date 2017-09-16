@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.practice.test.backstage.beans.Emp;
+import com.practice.test.backstage.currency.PagerList;
 import com.practice.test.backstage.daos.EmpDao;
 import com.practice.test.backstage.service.EmpService;
 
@@ -25,10 +26,12 @@ public class EmpServiceImpl implements EmpService{
 	private
 	EmpDao empDao;
 	
+	@SuppressWarnings("rawtypes")
 	@Override
-	public List<Emp> getEmpForPage(Integer skip, Integer size) {
-		List<Emp> emps = empDao.getEmpForPage(skip, size);
-		return emps;
+	public PagerList<Emp> getEmpForPage(Integer skip, Integer size, String prefixUrl) {
+		List<Emp> emps = empDao.getEmpForPage((skip-1)*size,size);
+		PagerList pagerList = new PagerList<>(skip, size, prefixUrl,emps,empDao.getEmpForCount());
+		return pagerList;
 	}
 
 	public EmpDao getEmpDao() {

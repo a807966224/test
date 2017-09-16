@@ -12,42 +12,36 @@
 -->
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.10.2.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/kkpager.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pagers.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/kkpager_blue.css"/>" />
-
-<script type="text/javascript">
-function getParameter(name) { 
-	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
-	var r = window.location.search.substr(1).match(reg); 
-	if (r!=null) return unescape(r[2]); return null;
-}
-
-//init
-$(function(){
-	var totalPage = 20;
-	var totalRecords = 390;
-	var pageNo = getParameter('pno');
-	if(!pageNo){
-		pageNo = 1;
-	}
-	//生成分页
-	//有些参数是可选的，比如lang，若不传有默认值
-	kkpager.generPageHtml({
-		pno : pageNo,
-		//总页码
-		total : totalPage,
-		//总数据条数
-		totalRecords : totalRecords,
-		//链接前部
-		hrefFormer : 'pager_test',
-		//链接尾部
-		//hrefLatter : '.html',
-		getLink : function(n){
-			return this.hrefFormer + this.hrefLatter + "?pno="+n;
-		}
+<script>
+	$(function(){
+		
+		$("#checkAll").click(function(){
+			if(this.checked){
+				$("input[name='id']").prop("checked","true"); 
+			}else{
+				$("input[name='id']").removeAttr("checked"); 
+			}
+		});
+		
+		$("input[name='id']").click(function(){
+			if(this.checked){
+				
+				var allSize = $("input[name='id']").length;
+				var checkedSize = $("input[name='id']:checkbox:checked").length;
+				if(allSize == checkedSize){
+					$("#checkAll").prop("checked","true"); 
+				}
+			}else{
+				$("#checkAll").removeAttr("checked"); 
+			} 
+		});
+		
+		//初始化分页插件
+		initPagers('${pagers.totalPage}','${pagers.totalSize}','${pagers.currentPage}','${pagers.prefixRequest}')
 	});
-});
 </script>
-
 </head>
 <body>
     <div>
@@ -55,14 +49,14 @@ $(function(){
         <form action="deletes" method="post">
         <table border="1" width="100%" >
             <tr>
-                <th><input type="checkbox" ></th>
+                <th><input type="checkbox" id="checkAll" ></th>
                 <th>序号</th>
                 <th>姓名</th>
                 <th>性别</th>
                 <th>年龄</th>
                 <th>操作</th>
             </tr>
-            <c:forEach var="entity" items="${emps}" varStatus="i">
+            <c:forEach var="entity" items="${pagers.list}" varStatus="i">
                 <tr>
                     <th><input type="checkbox" name="id" value="${entity.id}"></th>
                     <td>${i.count}</td>
