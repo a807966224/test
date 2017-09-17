@@ -5,12 +5,11 @@ package com.practice.test.backstage.daos.impl;
  * @author Scott
  *
  */
-public class EmpSql {
+public class DeptSql {
 	
-	private static final String prefixSql = "select id,name,sex,age,deptId,"
-			+ "(select name from dept where dept.id = emp.deptId) deptName from emp";
+	private static final String prefixSql = "select id,name,location from dept";
 	
-	public String getEmpForPage() {
+	public String getDeptForPage() {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
@@ -22,12 +21,11 @@ public class EmpSql {
 		return stringBuffer.toString();
 	}
 	
-	public String getEmpForCount() {
+	public String getDeptForCount() {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("select count(id) from emp ");
-		stringBuffer.append(" order by id desc ");
+		stringBuffer.append("select count(id) from dept ");
 		
 		return stringBuffer.toString();
 	}
@@ -38,7 +36,7 @@ public class EmpSql {
 		
 		stringBuffer.append(prefixSql);
 		
-		stringBuffer.append(" where emp.id = #{emp.id}");
+		stringBuffer.append(" where dept.id = #{dept.id}");
 		
 		return stringBuffer.toString();
 	}
@@ -47,9 +45,9 @@ public class EmpSql {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("insert into emp (name,sex,age,deptId) ");
+		stringBuffer.append("insert into dept (name,location) ");
 		
-		stringBuffer.append(" values (#{emp.name},#{emp.sex},#{emp.age},#{emp.deptId}) ");
+		stringBuffer.append(" values (#{dept.name},#{dept.location}) ");
 		
 		return stringBuffer.toString();
 	}
@@ -58,16 +56,16 @@ public class EmpSql {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("update emp set emp.name = #{emp.name}, emp.sex = #{emp.sex}, ");
+		stringBuffer.append("update dept set dept.name = #{dept.name}, dept.location = #{dept.location} ");
 		
-		stringBuffer.append(" emp.age = #{emp.age},emp.deptId = #{emp.deptId} where emp.id = #{emp.id} ");
+		stringBuffer.append("  where dept.id = #{dept.id} ");
 		
 		return stringBuffer.toString();
 	}
 	
 	public String delete() {
 		
-		StringBuffer stringBuffer = new StringBuffer("delete from emp where emp.id = #{id} ");
+		StringBuffer stringBuffer = new StringBuffer("delete from dept where dept.id = #{id} ");
 		
 		return stringBuffer.toString();
 	}

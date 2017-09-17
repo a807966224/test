@@ -13,6 +13,8 @@ public class Emp extends BaseBean {
 	private String name;//姓名
 	private Integer sex;//性别  1男2女
 	private Integer age;//年龄
+	private Long deptId;//部门ID
+	private String deptName;//部门名称 
 	
 	public String getName() {
 		return name;
@@ -35,6 +37,18 @@ public class Emp extends BaseBean {
 	@Override
 	public String toString() {
 		return "Emp [name=" + name + ", sex=" + sex + ", age=" + age + "]";
+	}
+	public Long getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 	
 }

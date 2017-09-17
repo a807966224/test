@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>人员管理</title>
+<title>部门管理</title>
 
 <!-- 
 	https://github.com/pgkk/kkpager.git
@@ -46,7 +46,7 @@ table td{text-align: center;}
 		});
 		
 		$("input[id='delOpt']").click(function(){
-			$("#listForm").attr("action","<%=request.getContextPath()%>/emp/delete").submit();
+			$("#listForm").attr("action","<%=request.getContextPath()%>/dept/delete").submit();
 			$("#listForm").attr("action","");
 		});
 		
@@ -57,16 +57,14 @@ table td{text-align: center;}
 </head>
 <body>
     <div>
-        <h2><span>人员管理</span></h2>
+        <h2><span>部门管理</span></h2>
         <form action="" method="post" id="listForm">
         <table border="1" width="100%" >
             <tr>
                 <th><input type="checkbox" id="checkAll" ></th>
                 <th>序号</th>
-                <th>姓名</th>
-                <th>性别</th>
-                <th>年龄</th>
-                <th>部门</th>
+                <th>名称</th>
+                <th>位置</th>
                 <th>操作</th>
             </tr>
             <c:forEach var="entity" items="${pagers.list}" varStatus="i">
@@ -74,18 +72,16 @@ table td{text-align: center;}
                     <th><input type="checkbox" name="id" value="${entity.id}"></th>
                     <td>${i.count}</td>
                     <td>${entity.name}</td>
-                    <td>${entity.sex}</td>
-                    <td>${entity.age}</td>
-                    <td>${entity.deptName}</td>
+                    <td>${entity.location}</td>
                     <td>
-                    <a href="<c:url value="/emp/"/>delete?id=${entity.id}">删除</a>
-                    <a href="<c:url value="/emp/edit"/>?id=${entity.id}" >编辑</a>
+                    <a href="<c:url value="/dept/"/>delete?id=${entity.id}">删除</a>
+                    <a href="<c:url value="/dept/edit"/>?id=${entity.id}" >编辑</a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
         <p>
-            <a href="<c:url value="/emp/edit"/>" ><input type='button' value='添加'/></a>
+            <a href="<c:url value="/dept/edit"/>" ><input type='button' value='添加'/></a>
             <input type="button" id="delOpt" value="批量删除" />
         </p>
         <div id="kkpager"></div>

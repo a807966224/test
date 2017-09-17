@@ -10,23 +10,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.practice.test.backstage.beans.Emp;
+import com.practice.test.backstage.beans.Dept;
 import com.practice.test.backstage.currency.PagerList;
-import com.practice.test.backstage.service.EmpService;
+import com.practice.test.backstage.service.DeptService;
 
 /**
- * 人员控制器
+ * 部门控制器
  * 
  * @author Scott
  *
  */
 // 注册到spring容器中
 @Controller
-@RequestMapping("/emp")
-public class EmpAction {
+@RequestMapping("/dept")
+public class DeptAction {
 
 	@Resource
-	EmpService empService;
+	DeptService deptService;
 
 	/**
 	 * 跳转至人员管理界面
@@ -34,53 +34,53 @@ public class EmpAction {
 	 * @param mode
 	 * @return
 	 */
-	@RequestMapping("/empList")
-	public String toEmp(Model model, Emp emp,@RequestParam(required = false, defaultValue = "1") Integer skip,
+	@RequestMapping("/deptList")
+	public String toDept(Model model, Dept dept,@RequestParam(required = false, defaultValue = "1") Integer skip,
 			@RequestParam(required = false, defaultValue = "2") Integer size,HttpServletRequest request) {
 		
 		
 		//获取查询数据数量
-		model.addAttribute("pagers", empService.getEmpForPage(skip, size, request.getRequestURI()));
+		model.addAttribute("pagers", deptService.getDeptForPage(skip, size, request.getRequestURI()));
 		
-		model.addAttribute("emp", emp);
+		model.addAttribute("dept", dept);
 		
-		return "backstage/emp/empList";
+		return "backstage/dept/deptList";
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(Emp emp,Model model) {
+	public String edit(Dept dept,Model model) {
 		
 		//获取唯一数据
-		if(emp.getId() != null) {
-			emp = empService.get(emp);
+		if(dept.getId() != null) {
+			dept = deptService.get(dept);
 		}
 		
 		//存放至封装类中去
-		model.addAttribute("bean", emp);
+		model.addAttribute("bean", dept);
 		
 		//待添加      查询部门集合   放置在人员编辑界面
 		
-		return "backstage/emp/empEdit";
+		return "backstage/dept/deptEdit";
 	}
 	
 	@RequestMapping("/save")
-	public String save(Emp emp,Model model) {
+	public String save(Dept dept,Model model) {
 		
-		if(emp.getId() == null) {
-			empService.insert(emp);
+		if(dept.getId() == null) {
+			deptService.insert(dept);
 		}else {
-			empService.update(emp);
+			deptService.update(dept);
 		}
 		
-		return "redirect:/emp/empList";
+		return "redirect:/dept/deptList";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam(name = "id") Long[] ids) {
 		
-		empService.delete(ids);
+		deptService.delete(ids);
 		
-		return "redirect:/emp/empList";
+		return "redirect:/dept/deptList";
 	}
 	
 }
