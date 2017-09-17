@@ -14,6 +14,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/kkpager.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pagers.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/kkpager_blue.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/css/test.css"/>">
 
 <style>
 
@@ -74,12 +75,16 @@ table td{text-align: center;}
                     <th><input type="checkbox" name="id" value="${entity.id}"></th>
                     <td>${i.count}</td>
                     <td>${entity.name}</td>
-                    <td>${entity.sex}</td>
+                    <td>
+                    	<c:if test="${entity.sex == 1}">男</c:if>
+						<c:if test="${entity.sex == 2}">女</c:if>
+					</td>
                     <td>${entity.age}</td>
                     <td>${entity.deptName}</td>
                     <td>
                     <a href="<c:url value="/emp/"/>delete?id=${entity.id}">删除</a>
                     <a href="<c:url value="/emp/edit"/>?id=${entity.id}" >编辑</a>
+                    <a href="<c:url value="/emp/edit"/>?id=${entity.id}&readOnly=true" >详情</a>
                     </td>
                 </tr>
             </c:forEach>

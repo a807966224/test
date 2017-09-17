@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.test.backstage.beans.Dept;
 import com.practice.test.backstage.currency.PagerList;
@@ -21,6 +22,7 @@ import com.practice.test.backstage.utils.StringUtils;
  *
  */
 //加载至spring 容器中
+@Transactional
 @Service
 public class DeptServiceImpl implements DeptService{
 
@@ -46,7 +48,7 @@ public class DeptServiceImpl implements DeptService{
 
 	@Override
 	public Dept get(Dept dept) {
-		return deptDao.get(dept);
+		return deptDao.get(dept.getId());
 	}
 
 	@Override
@@ -64,6 +66,11 @@ public class DeptServiceImpl implements DeptService{
 		for(Long id : ids) {
 			deptDao.delete(id);		
 		}
+	}
+
+	@Override
+	public List<Dept> getList() {
+		return deptDao.getList();
 	}
 
 }

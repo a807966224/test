@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practice.test.backstage.beans.Emp;
 import com.practice.test.backstage.currency.PagerList;
+import com.practice.test.backstage.service.DeptService;
 import com.practice.test.backstage.service.EmpService;
 
 /**
@@ -27,6 +28,9 @@ public class EmpAction {
 
 	@Resource
 	EmpService empService;
+	
+	@Resource
+	DeptService deptService;
 
 	/**
 	 * 跳转至人员管理界面
@@ -48,7 +52,7 @@ public class EmpAction {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(Emp emp,Model model) {
+	public String edit(Emp emp,Model model,@RequestParam(required=false) boolean readOnly) {
 		
 		//获取唯一数据
 		if(emp.getId() != null) {
@@ -58,7 +62,11 @@ public class EmpAction {
 		//存放至封装类中去
 		model.addAttribute("bean", emp);
 		
-		//待添加      查询部门集合   放置在人员编辑界面
+		model.addAttribute("readOnly", readOnly);
+		
+		//      查询部门集合   放置在人员编辑界面
+		model.addAttribute("deptList", deptService.getList());
+		
 		
 		return "backstage/emp/empEdit";
 	}

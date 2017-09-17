@@ -5,7 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
@@ -39,7 +43,12 @@ public interface EmpDao{
 	 * @return
 	 */
 	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="get")
-	public Emp get(@Param("emp") Emp emp);
+	@Results({
+		@Result(property="deptId",column="deptId"),
+		@Result(property="dept",column="deptId",
+		one=@One(select="com.practice.test.backstage.daos.DeptDao.get"))
+	})
+	public Emp get(@Param("id") Long id);
 	
 	/**
 	 * 添加
@@ -61,4 +70,12 @@ public interface EmpDao{
 	 */
 	@DeleteProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="delete")
 	public void delete(@Param("id") Long id);
+	
+	/**
+	 * 根据部门ID查询人员集合
+	 * @param id
+	 * @return
+	 */
+	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="getListByDeptId")
+	public List<Emp> getListByDeptId(@Param("id") Long id);
 }

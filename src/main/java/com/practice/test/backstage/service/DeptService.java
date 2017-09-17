@@ -16,4 +16,6 @@ public interface DeptService {
 	public void update(Dept dept);
 	
 	public void delete(Long[] ids);
+	
+	public List<Dept> getList();
 }

@@ -48,7 +48,7 @@ public class DeptAction {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(Dept dept,Model model) {
+	public String edit(Dept dept,Model model,@RequestParam(required=false) boolean readOnly) {
 		
 		//获取唯一数据
 		if(dept.getId() != null) {
@@ -57,6 +57,8 @@ public class DeptAction {
 		
 		//存放至封装类中去
 		model.addAttribute("bean", dept);
+		
+		model.addAttribute("readOnly", readOnly);
 		
 		//待添加      查询部门集合   放置在人员编辑界面
 		

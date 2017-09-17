@@ -1,5 +1,7 @@
 package com.practice.test.backstage.daos.impl;
 
+import java.util.Map;
+
 /**
  * 操作数据库的sql语句
  * @author Scott
@@ -38,7 +40,7 @@ public class EmpSql {
 		
 		stringBuffer.append(prefixSql);
 		
-		stringBuffer.append(" where emp.id = #{emp.id}");
+		stringBuffer.append(" where emp.id = #{id}");
 		
 		return stringBuffer.toString();
 	}
@@ -70,6 +72,18 @@ public class EmpSql {
 		StringBuffer stringBuffer = new StringBuffer("delete from emp where emp.id = #{id} ");
 		
 		return stringBuffer.toString();
+	}
+	
+	public String getListByDeptId(Long id) {
+		
+		System.out.println(id);
+		
+		StringBuffer stringBuffer = new StringBuffer(prefixSql);
+		
+		stringBuffer.append(" where emp.deptId = " + id);
+		
+		return stringBuffer.toString();
+		
 	}
 
 }

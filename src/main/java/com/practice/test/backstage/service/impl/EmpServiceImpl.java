@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.test.backstage.beans.Emp;
 import com.practice.test.backstage.currency.PagerList;
@@ -21,6 +22,7 @@ import com.practice.test.backstage.utils.StringUtils;
  *
  */
 //加载至spring 容器中
+@Transactional
 @Service
 public class EmpServiceImpl implements EmpService{
 
@@ -46,7 +48,7 @@ public class EmpServiceImpl implements EmpService{
 
 	@Override
 	public Emp get(Emp emp) {
-		return empDao.get(emp);
+		return empDao.get(emp.getId());
 	}
 
 	@Override

@@ -5,7 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
@@ -25,6 +28,11 @@ public interface DeptDao{
 	 * @return
 	 */
 	@SelectProvider(type=com.practice.test.backstage.daos.impl.DeptSql.class,method="getDeptForPage")
+	@Results({
+        @Result(property="id",column="id"),
+        @Result(property="empList",column="id",javaType=List.class,
+        many=@Many(select="com.practice.test.backstage.daos.EmpDao.getListByDeptId"))
+    })
 	public List<Dept> getDeptForPage(@Param("skip") Integer skip,@Param("size") Integer size);
 
 	/**
@@ -39,7 +47,12 @@ public interface DeptDao{
 	 * @return
 	 */
 	@SelectProvider(type=com.practice.test.backstage.daos.impl.DeptSql.class,method="get")
-	public Dept get(@Param("dept") Dept dept);
+	@Results({
+			@Result(id=true,property="id",column="id"),
+			@Result(property="empList",column="id",
+			many=@Many(select="com.practice.test.backstage.daos.EmpDao.getListByDeptId"))
+	})
+	public Dept get(@Param("id") Long id);
 	
 	/**
 	 * 添加
@@ -61,4 +74,8 @@ public interface DeptDao{
 	 */
 	@DeleteProvider(type=com.practice.test.backstage.daos.impl.DeptSql.class,method="delete")
 	public void delete(@Param("id") Long id);
+	
+	
+	@SelectProvider(type=com.practice.test.backstage.daos.impl.DeptSql.class,method="getList")
+	public List<Dept> getList();
 }

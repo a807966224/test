@@ -16,6 +16,8 @@ public class Emp extends BaseBean {
 	private Long deptId;//部门ID
 	private String deptName;//部门名称 
 	
+	private Dept dept;
+	
 	public String getName() {
 		return name;
 	}
@@ -49,6 +51,12 @@ public class Emp extends BaseBean {
 	}
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+	public Dept getDept() {
+		return dept;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept;
 	}
 	
 }

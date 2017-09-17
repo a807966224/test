@@ -36,7 +36,7 @@ public class DeptSql {
 		
 		stringBuffer.append(prefixSql);
 		
-		stringBuffer.append(" where dept.id = #{dept.id}");
+		stringBuffer.append(" where dept.id = #{id}");
 		
 		return stringBuffer.toString();
 	}
@@ -69,5 +69,15 @@ public class DeptSql {
 		
 		return stringBuffer.toString();
 	}
-
+	
+	public String getList() {
+			
+			StringBuffer stringBuffer = new StringBuffer("");
+			
+			stringBuffer.append(prefixSql);
+			stringBuffer.append(" order by id desc ");
+			
+			return stringBuffer.toString();
+		
+	}
 }
