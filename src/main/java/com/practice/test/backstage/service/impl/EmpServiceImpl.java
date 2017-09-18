@@ -30,11 +30,10 @@ public class EmpServiceImpl implements EmpService{
 	@Resource
 	private EmpDao empDao;
 	
-	@SuppressWarnings("rawtypes")
 	@Override
 	public PagerList<Emp> getEmpForPage(Integer skip, Integer size, String prefixUrl) {
 		List<Emp> emps = empDao.getEmpForPage((skip-1)*size,size);
-		PagerList pagerList = new PagerList<>(skip, size, prefixUrl,emps,empDao.getEmpForCount());
+		PagerList<Emp> pagerList = new PagerList<Emp>(skip, size, prefixUrl,emps,empDao.getEmpForCount());
 		return pagerList;
 	}
 

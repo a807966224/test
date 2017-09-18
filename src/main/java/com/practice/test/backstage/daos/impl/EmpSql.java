@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class EmpSql {
 	
-	private static final String prefixSql = "select id,name,sex,age,deptId,"
+	private static final String prefixSql = "select id,name,sex,age,deptId,photoSrc,"
 			+ "(select name from dept where dept.id = emp.deptId) deptName from emp";
 	
 	public String getEmpForPage() {
@@ -49,9 +49,9 @@ public class EmpSql {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("insert into emp (name,sex,age,deptId) ");
+		stringBuffer.append("insert into emp (name,sex,age,deptId,photoSrc) ");
 		
-		stringBuffer.append(" values (#{emp.name},#{emp.sex},#{emp.age},#{emp.deptId}) ");
+		stringBuffer.append(" values (#{emp.name},#{emp.sex},#{emp.age},#{emp.deptId},#{emp.photoSrc}) ");
 		
 		return stringBuffer.toString();
 	}
@@ -60,7 +60,7 @@ public class EmpSql {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("update emp set emp.name = #{emp.name}, emp.sex = #{emp.sex}, ");
+		stringBuffer.append("update emp set emp.name = #{emp.name}, emp.sex = #{emp.sex},emp.photoSrc = #{emp.photoSrc}, ");
 		
 		stringBuffer.append(" emp.age = #{emp.age},emp.deptId = #{emp.deptId} where emp.id = #{emp.id} ");
 		
@@ -75,8 +75,6 @@ public class EmpSql {
 	}
 	
 	public String getListByDeptId(Long id) {
-		
-		System.out.println(id);
 		
 		StringBuffer stringBuffer = new StringBuffer(prefixSql);
 		

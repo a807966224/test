@@ -30,11 +30,10 @@ public class DeptServiceImpl implements DeptService{
 	@Resource
 	private DeptDao deptDao;
 	
-	@SuppressWarnings("rawtypes")
 	@Override
 	public PagerList<Dept> getDeptForPage(Integer skip, Integer size, String prefixUrl) {
 		List<Dept> depts = deptDao.getDeptForPage((skip-1)*size,size);
-		PagerList pagerList = new PagerList<>(skip, size, prefixUrl,depts,deptDao.getDeptForCount());
+		PagerList<Dept> pagerList = new PagerList<Dept>(skip, size, prefixUrl,depts,deptDao.getDeptForCount());
 		return pagerList;
 	}
 

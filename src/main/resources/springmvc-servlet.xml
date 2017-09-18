@@ -8,6 +8,9 @@
         http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+        
+    <context:property-placeholder location="classpath*:data.properties" />
+    
     <!-- 自动扫描包，实现支持注解的IOC -->
     <context:component-scan base-package="com.practice.test" />
 

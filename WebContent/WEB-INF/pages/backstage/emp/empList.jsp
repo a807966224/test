@@ -90,6 +90,7 @@ table td{text-align: center;}
             </c:forEach>
         </table>
         <p>
+        	<a href="<c:url value="/"/>" ><input type='button' value='返回菜单'/></a>
             <a href="<c:url value="/emp/edit"/>" ><input type='button' value='添加'/></a>
             <input type="button" id="delOpt" value="批量删除" />
         </p>

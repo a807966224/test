@@ -1,14 +1,22 @@
 package com.practice.test.backstage.actions;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.practice.test.backstage.beans.Emp;
 import com.practice.test.backstage.currency.PagerList;
@@ -32,6 +40,9 @@ public class EmpAction {
 	@Resource
 	DeptService deptService;
 
+	@Value("${uploadImageUrl_windows}")
+	private String uploadImageUrl_windows;
+	
 	/**
 	 * 跳转至人员管理界面
 	 * 
@@ -89,6 +100,47 @@ public class EmpAction {
 		empService.delete(ids);
 		
 		return "redirect:/emp/empList";
+	}
+	
+	@RequestMapping("/uploadPhoto")
+	@ResponseBody
+	public Map uploadPhoto(@RequestParam("upfile") MultipartFile upfile,HttpServletRequest request) {
+		
+		Map result = new HashMap();
+		
+		if(upfile!=null){ 
+            //如果文件大小不为0
+            if(upfile.getSize()>0){
+                //获得上传位置
+                //生成文件名
+                String filename=UUID.randomUUID().toString()+upfile.getOriginalFilename().substring(upfile.getOriginalFilename().lastIndexOf("."));
+                File tempFile=new File(uploadImageUrl_windows, filename);
+                if(tempFile.getParent().isEmpty()) {
+                	tempFile.mkdirs();
+                }
+                try {
+                    //保存文件
+                	upfile.transferTo(tempFile);
+                    //更新数据
+                	result.put("flag", true);
+                	result.put("photoSrc", filename);
+                	return result;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+		result.put("flag", false);
+    	result.put("photoSrc", null);
+		return result;
+	}
+
+	public String getUploadImageUrl_windows() {
+		return uploadImageUrl_windows;
+	}
+
+	public void setUploadImageUrl_windows(String uploadImageUrl_windows) {
+		this.uploadImageUrl_windows = uploadImageUrl_windows;
 	}
 	
 }

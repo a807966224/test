@@ -16,6 +16,8 @@ public class Emp extends BaseBean {
 	private Long deptId;//部门ID
 	private String deptName;//部门名称 
 	
+	private String photoSrc;//头像
+	
 	private Dept dept;
 	
 	public String getName() {
@@ -57,6 +59,12 @@ public class Emp extends BaseBean {
 	}
 	public void setDept(Dept dept) {
 		this.dept = dept;
+	}
+	public String getPhotoSrc() {
+		return photoSrc;
+	}
+	public void setPhotoSrc(String photoSrc) {
+		this.photoSrc = photoSrc;
 	}
 	
 }
