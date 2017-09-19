@@ -1,24 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
+<%@ include file="../headConfigs/_headers.jsp"%>
 <title>部门管理</title>
-
-<!-- 
-	https://github.com/pgkk/kkpager.git
-	js分页展示控件 
--->
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.10.2.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/kkpager.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/pagers.js"/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/kkpager_blue.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources/css/test.css"/>">
-
 <style>
-
 table{ border:0;border-collapse:collapse;}
 td{ font:normal 12px/17px Arial;padding:20px;width:100px;text-align:center; }
 th{ font:bold 12px/17px Arial;text-align:center;padding:20px;border-bottom:1px solid #333;width:100px;background:#d3dfed;}

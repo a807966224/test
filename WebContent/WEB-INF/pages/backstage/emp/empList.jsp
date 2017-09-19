@@ -1,23 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
+<%@ include file="../headConfigs/_headers.jsp"%>
 <title>人员管理</title>
-
-<!-- 
-	https://github.com/pgkk/kkpager.git
-	js分页展示控件 
--->
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.10.2.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/kkpager.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/pagers.js"/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/kkpager_blue.css"/>" />
-<link rel="stylesheet" href="<c:url value="/resources/css/test.css"/>">
-
 <style>
-
 table td{text-align: center;}
 #searchTable tr td{padding:10px;}
 </style>

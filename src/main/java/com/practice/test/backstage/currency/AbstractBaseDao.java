@@ -25,13 +25,13 @@ public abstract class AbstractBaseDao<T extends BaseBean> extends SqlSessionDaoS
 	//添加
 	private static final String SQL_INSERT = "insert";
     //删除
-	private static final String SQL_DELETE_BY_PRIMARY_KEY = "delete";
+	private static final String SQL_DELETE = "delete";
 	//批量删除
-	private static final String SQL_DELETE_BATCH_BY_PRIMARY_KEY = "deleteBatch";
+	private static final String SQL_DELETE_BATCH = "deleteBatch";
     //修改
-	private static final String SQL_UPDATE_BY_PRIMARY_KEY = "update";
+	private static final String SQL_UPDATE = "update";
     //根据主键查询唯一数据
-	private static final String SQL_SELECT_BY_PRIMARY_KEY = "get";
+	private static final String SQL_GET = "get";
 	
 	@Override
 	@Autowired
@@ -78,22 +78,22 @@ public abstract class AbstractBaseDao<T extends BaseBean> extends SqlSessionDaoS
 
 	@Override
 	public Integer update(T t) {
-		return getSqlSession().insert(getStatement(SQL_UPDATE_BY_PRIMARY_KEY), t);
+		return getSqlSession().insert(getStatement(SQL_UPDATE), t);
 	}
 
 	@Override
 	public Integer delete(Long id) {
-		return getSqlSession().delete(getStatement(SQL_DELETE_BY_PRIMARY_KEY), id);
+		return getSqlSession().delete(getStatement(SQL_DELETE), id);
 	}
 
 	@Override
 	public T get(Long id) {
-		return getSqlSession().selectOne(SQL_SELECT_BY_PRIMARY_KEY, id);
+		return getSqlSession().selectOne(SQL_GET, id);
 	}
 
 	@Override
 	public Integer deleteBatch(Map paramters) {
-		return getSqlSession().delete(SQL_DELETE_BATCH_BY_PRIMARY_KEY, paramters);
+		return getSqlSession().delete(SQL_DELETE_BATCH, paramters);
 	}
 
 	

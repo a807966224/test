@@ -1,6 +1,5 @@
 package com.practice.test.backstage.actions;
 
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practice.test.backstage.beans.Dept;
-import com.practice.test.backstage.currency.PagerList;
 import com.practice.test.backstage.service.DeptService;
 
 /**

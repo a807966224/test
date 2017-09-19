@@ -1,4 +1,4 @@
-package com.practice.test.backstage.currency;
+package com.practice.test.backstage.utils;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.ApplicationContext;

@@ -12,6 +12,7 @@
 
 <a href='<c:url value="/emp/empList"/>'>人员管理</a>  
 <a href='<c:url value="/dept/deptList"/>'>部门管理</a> 
+<a href='<c:url value="/team/teamList"/>'>班组管理</a> 
 
 </body>
 </html>

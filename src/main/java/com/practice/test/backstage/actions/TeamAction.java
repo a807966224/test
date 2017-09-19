@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practice.test.backstage.beans.Team;
-import com.practice.test.backstage.beans.Team;
 import com.practice.test.backstage.service.TeamService;
-import com.practice.test.backstage.utils.StringUtils;
 
 @Controller
 @RequestMapping("/team")
