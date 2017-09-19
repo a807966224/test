@@ -36,7 +36,7 @@ public class EmpServiceImpl implements EmpService{
 	
 	@Override
 	public PagerList<Emp> getEmpForPage(Emp emp, Integer skip, Integer size, String prefixUrl) {
-		List<Emp> emps = empDao.getEmpForPage(emp,(skip-1)*size,size);
+		List<Emp> emps = empDao.getEmpForPage(emp,skip,size);
 		PagerList<Emp> pagerList = new PagerList<Emp>(skip, size, prefixUrl,emps,empDao.getEmpForCount(emp));
 		return pagerList;
 	}

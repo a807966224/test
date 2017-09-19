@@ -26,6 +26,8 @@
     <freemarker-version>2.3.23</freemarker-version>
     <jackon-version>2.5.2</jackon-version>
     <dbcp2-version>2.1.1</dbcp2-version>
+    <slf-version>1.7.21</slf-version>
+    <fastjson-version>1.2.7</fastjson-version>
   </properties>
 
   <dependencies>
@@ -189,6 +191,20 @@
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-dbcp2</artifactId>
 	    <version>${dbcp2-version}</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>${slf-version}</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>${fastjson-version}</version>
 	</dependency>
     
   </dependencies>

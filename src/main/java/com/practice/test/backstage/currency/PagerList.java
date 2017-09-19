@@ -20,7 +20,7 @@ public class PagerList<T> {
 	private List<T> list;
 
 	/**
-	 * @param pageNo	第几页
+	 * @param pageNo	
 	 * @param pageSize	每页容量
 	 * @param sourceList	源数据
 	 */
@@ -30,6 +30,8 @@ public class PagerList<T> {
             return;
         }
         
+		pageNo = pageNo / 2 + 1;//mysql 分页开始条数   需要转化成  第几页
+		
         this.totalSize = counts;
         
         this.pageSize = pageSize;
@@ -41,7 +43,7 @@ public class PagerList<T> {
         if(this.totalPage < pageNo){
             this.currentPage = this.totalPage;
         }else{
-            this.currentPage = pageNo;
+        	this.currentPage = pageNo;
         }
         
         this.list = sourceList;

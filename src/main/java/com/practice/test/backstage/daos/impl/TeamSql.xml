@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.practice.test.backstage.daos.TeamDao">
+
+	<!-- 查询语句统一写在头上 -->
+	<sql id="select_pre">
+		select t.id,t.name from
+		<include refid="TABLE_NAME" />
+	</sql>
+	<!-- 查询表名 -->
+	<sql id="TABLE_NAME">
+		team t
+	</sql>
+	<!-- 查询语句 所 带的条件 -->
+	<sql id="WHERE_PARAMETERS">
+		<where>
+			<if test="name != null">
+				t.name like concat('%',#{team.name},'%')
+			</if>
+		</where>
+	</sql>
+	<sql id="ORDERS">
+		order by t.id desc
+	</sql>
+
+
+	<select id="selectAll" parameterType="com.practice.test.backstage.beans.Team"
+		resultType="com.practice.test.backstage.beans.Team">
+
+		select t.id,t.name from
+
+		<include refid="TABLE_NAME" />
+
+		<include refid="ORDERS" />
+
+		limit #{skip},#{size}
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(t.id) from
+		<include refid="TABLE_NAME" />
+	</select>
+
+	<select id="get" parameterType="java.lang.Long"
+		resultType="com.practice.test.backstage.beans.Team">
+		<include refid="select_pre" />
+		<where>
+			t.id = #{id}
+		</where>
+	</select>
+
+
+	<insert id="insert" parameterType="com.practice.test.backstage.beans.Team">
+		insert into team (name) values (#{name})
+		<selectKey keyProperty="id" resultType="java.lang.Long">
+			select
+			LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="com.practice.test.backstage.beans.Team">
+		update
+		<include refid="TABLE_NAME" />
+		<set>
+			<if test="name != null">
+				name = #{name}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteBatch" parameterType="java.lang.Long">
+		delete from team
+		where id in
+		<foreach collection="ids" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

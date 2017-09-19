@@ -29,7 +29,7 @@ public class DeptServiceImpl implements DeptService{
 	
 	@Override
 	public PagerList<Dept> getDeptForPage(Integer skip, Integer size, String prefixUrl) {
-		List<Dept> depts = deptDao.getDeptForPage((skip-1)*size,size);
+		List<Dept> depts = deptDao.getDeptForPage(skip,size);
 		PagerList<Dept> pagerList = new PagerList<Dept>(skip, size, prefixUrl,depts,deptDao.getDeptForCount());
 		return pagerList;
 	}

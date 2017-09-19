@@ -5,12 +5,14 @@ import java.util.Properties;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.practice.test.backstage.currency.MyBatisUtil;
+import com.practice.test.backstage.currency.SqlSessionUtil;
 import com.practice.test.backstage.daos.EmpDao;
 
 public class TestEmp {
@@ -45,6 +47,13 @@ public class TestEmp {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		Properties properties = (Properties)applicationContext.getBean("configProperties");
 		System.out.println(properties.get("uploadImageUrl_windows"));
+	}
+	
+	
+	@Test
+	public void getSqlSession() {
+		SqlSessionFactory sqlSessionFactory = SqlSessionUtil.getInstance();
+		System.out.println(sqlSessionFactory==null);
 	}
 	
 

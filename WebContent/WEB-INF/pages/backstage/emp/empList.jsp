@@ -52,7 +52,7 @@ table td{text-align: center;}
 		});
 		
 		//初始化分页插件
-		initPagers('${pagers.totalPage}','${pagers.totalSize}','${pagers.currentPage}','${pagers.prefixRequest}')
+		initPagers('${pagers.totalPage}','${pagers.totalSize}','${pagers.currentPage}','${pagers.pageSize}','${pagers.prefixRequest}')
 	});
 	
 	function searchList(){

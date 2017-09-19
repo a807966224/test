@@ -8,12 +8,12 @@ import java.io.Serializable;
  *
  */
 @SuppressWarnings("serial")
-public class BaseBean   implements Serializable{
+public class BaseBean implements Serializable{
 	
 	
 	private Long id;
 	
-	private Integer skip = 1;//存放第几页
+	private Integer skip = 0;
 	private Integer size = 2;//每页容量
 	
 	public Long getId() {

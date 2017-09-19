@@ -1,5 +1,6 @@
 //init
-function initPagers(totalPage,totalSize,currentPage,prefixRequest){
+function initPagers(totalPage,totalSize,currentPage,pageSize,prefixRequest){
+	
 	var totalPage = totalPage;
 	var totalRecords = totalSize;
 	var pageNo = currentPage;
@@ -25,7 +26,7 @@ function initPagers(totalPage,totalSize,currentPage,prefixRequest){
 		click : function(n){
 			// do something
 			//手动选中按钮
-			MakeForm(n,prefixRequest);//在无列表查询条件下需创建表单传分页参数
+			MakeForm(n,pageSize,prefixRequest);//在无列表查询条件下需创建表单传分页参数
 			
 			return false;
 		}
@@ -33,7 +34,7 @@ function initPagers(totalPage,totalSize,currentPage,prefixRequest){
 }
 
 //构建一个 form 
-function MakeForm(n,prefixRequest) 
+function MakeForm(n,pageSize,prefixRequest) 
 { 
   var exitForm = document.getElementById("listForm");
   if(exitForm){
@@ -41,9 +42,16 @@ function MakeForm(n,prefixRequest)
 	  // 设置相应参数 
 	  input.type = "hidden"; 
 	  input.name = "skip"; 
-	  input.value = n; 
+	  input.value = (n-1)*pageSize; 
 	  // 将该输入框插入到 form 中 
 	  exitForm.appendChild(input); 
+	  var input2 = document.createElement("input"); 
+	  // 设置相应参数 
+	  input2.type = "hidden"; 
+	  input2.name = "size"; 
+	  input2.value = pageSize; 
+	  // 将该输入框插入到 form 中 
+	  exitForm.appendChild(input2); 
 	  // form 的提交方式 
 	  exitForm.method = "POST"; 
 	  // form 提交路径 
@@ -63,6 +71,13 @@ function MakeForm(n,prefixRequest)
 	  input.type = "hidden"; 
 	  input.name = "skip"; 
 	  input.value = n; 
+	  // 将该输入框插入到 form 中 
+	  form1.appendChild(input); 
+	  var input = document.createElement("input"); 
+	  // 设置相应参数 
+	  input.type = "hidden"; 
+	  input.name = "size"; 
+	  input.value = pageSize; 
 	  // 将该输入框插入到 form 中 
 	  form1.appendChild(input); 
 	  // form 的提交方式 
