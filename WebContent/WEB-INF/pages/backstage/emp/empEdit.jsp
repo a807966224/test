@@ -1,21 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
+<%@ include file="../headConfigs/_headers.jsp"%>
 <title>新增人员</title>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.10.2.min.js"/>"></script>
-<link rel="stylesheet" href="<c:url value="/resources/css/test.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/quick_layout-min.css"/>">
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-html5Validate.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/utils.js"/>"></script>
 
-
-<link href="<c:url value="/resources/css/uploader-image.css"/>" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<c:url value="/resources/js/Q.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/Q.Uploader.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/Q.Uploader.UI.Image.js"/>"></script>
 
 <style>
 .error { box-shadow: 0 0 10px #ff4136; }

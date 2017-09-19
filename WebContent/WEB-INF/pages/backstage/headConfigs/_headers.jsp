@@ -13,3 +13,12 @@
 <script type="text/javascript" src="<c:url value="/resources/js/pagers.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/kkpager_blue.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/css/test.css"/>">
+
+<link rel="stylesheet" href="<c:url value="/resources/css/quick_layout-min.css"/>">
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-html5Validate.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/utils.js"/>"></script>
+
+<link href="<c:url value="/resources/css/uploader-image.css"/>" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<c:url value="/resources/js/Q.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/Q.Uploader.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/Q.Uploader.UI.Image.js"/>"></script>
