@@ -29,14 +29,14 @@ public interface EmpDao{
 	 * @return
 	 */
 	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="getEmpForPage")
-	public List<Emp> getEmpForPage(@Param("skip") Integer skip,@Param("size") Integer size);
+	public List<Emp> getEmpForPage(@Param("emp") Emp emp,@Param("skip") Integer skip,@Param("size") Integer size);
 
 	/**
 	 * 获取数据数量
 	 * @return
 	 */
 	@SelectProvider(type=com.practice.test.backstage.daos.impl.EmpSql.class,method="getEmpForCount")
-	public Integer getEmpForCount();
+	public Integer getEmpForCount(@Param("emp") Emp emp);
 	
 	/**
 	 * 获取唯一数据

@@ -2,6 +2,10 @@ package com.practice.test.backstage.daos.impl;
 
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
+import com.practice.test.backstage.beans.Emp;
+
 /**
  * 操作数据库的sql语句
  * @author Scott
@@ -10,13 +14,24 @@ import java.util.Map;
 public class EmpSql {
 	
 	private static final String prefixSql = "select id,name,sex,age,deptId,photoSrc,"
-			+ "(select name from dept where dept.id = emp.deptId) deptName from emp";
+			+ "(select name from dept where dept.id = emp.deptId) deptName from emp where 1 = 1";
 	
-	public String getEmpForPage() {
+	public String getEmpForPage(Map map) {
+		
+		Emp emp = (Emp)map.get("emp");
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
 		stringBuffer.append(prefixSql);
+		
+		if(!StringUtils.isEmpty(emp.getName())) {
+			stringBuffer.append(" and emp.name like concat('%',#{emp.name},'%')");
+		}
+		
+		if(emp.getDeptId() != null) {
+			stringBuffer.append(" and emp.deptId = #{emp.deptId}");
+		}
+		
 		stringBuffer.append(" order by id desc ");
 		//从第几条开始  往后进行每页几条分页查询
 		stringBuffer.append(" limit #{skip},#{size} ");
@@ -24,11 +39,22 @@ public class EmpSql {
 		return stringBuffer.toString();
 	}
 	
-	public String getEmpForCount() {
+	public String getEmpForCount(Map map) {
+		
+		Emp emp = (Emp)map.get("emp");
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("select count(id) from emp ");
+		stringBuffer.append("select count(id) from emp where 1 = 1");
+		
+		if(!StringUtils.isEmpty(emp.getName())) {
+			stringBuffer.append(" and emp.name like concat('%',#{emp.name},'%')");
+		}
+		
+		if(emp.getDeptId() != null) {
+			stringBuffer.append(" and emp.deptId = #{emp.deptId}");
+		}
+		
 		stringBuffer.append(" order by id desc ");
 		
 		return stringBuffer.toString();
@@ -40,7 +66,7 @@ public class EmpSql {
 		
 		stringBuffer.append(prefixSql);
 		
-		stringBuffer.append(" where emp.id = #{id}");
+		stringBuffer.append(" and emp.id = #{id}");
 		
 		return stringBuffer.toString();
 	}
@@ -78,7 +104,7 @@ public class EmpSql {
 		
 		StringBuffer stringBuffer = new StringBuffer(prefixSql);
 		
-		stringBuffer.append(" where emp.deptId = " + id);
+		stringBuffer.append(" and emp.deptId = " + id);
 		
 		return stringBuffer.toString();
 		

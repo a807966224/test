@@ -50,14 +50,15 @@ public class EmpAction {
 	 * @return
 	 */
 	@RequestMapping("/empList")
-	public String toEmp(Model model, Emp emp,@RequestParam(required = false, defaultValue = "1") Integer skip,
-			@RequestParam(required = false, defaultValue = "2") Integer size,HttpServletRequest request) {
+	public String toEmp(Model model, Emp emp,HttpServletRequest request) {
 		
 		
 		//获取查询数据数量
-		model.addAttribute("pagers", empService.getEmpForPage(skip, size, request.getRequestURI()));
+		model.addAttribute("pagers", empService.getEmpForPage(emp,emp.getSkip(), emp.getSize(), request.getRequestURI()));
 		
-		model.addAttribute("emp", emp);
+		model.addAttribute("bean", emp);
+		
+		model.addAttribute("deptList", deptService.getList());
 		
 		return "backstage/emp/empList";
 	}
@@ -83,7 +84,7 @@ public class EmpAction {
 	}
 	
 	@RequestMapping("/save")
-	public String save(Emp emp,Model model) {
+	public String save(Emp emp,Model model,@RequestParam(required=false) String[] tmpPhoto) {
 		
 		if(emp.getId() == null) {
 			empService.insert(emp);
@@ -91,47 +92,63 @@ public class EmpAction {
 			empService.update(emp);
 		}
 		
+		//回收垃圾图片
+		if(tmpPhoto != null) {
+			for(String photoSrc : tmpPhoto) {
+				if(!photoSrc.equals(emp.getPhotoSrc())) {
+					File file = new File(uploadImageUrl_windows,photoSrc);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+			}
+		}
+		
 		return "redirect:/emp/empList";
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam(name = "id") Long[] ids) {
-		
-		empService.delete(ids);
+	public String delete(@RequestParam(name = "id") Long[] ids,@RequestParam(name = "delPhotoSrc") String[] delPhotoSrcs) {
+	
+		empService.delete(ids,delPhotoSrcs);
 		
 		return "redirect:/emp/empList";
 	}
 	
 	@RequestMapping("/uploadPhoto")
 	@ResponseBody
-	public Map uploadPhoto(@RequestParam("upfile") MultipartFile upfile,HttpServletRequest request) {
-		
+	public Map uploadPhoto(@RequestParam("upfile") MultipartFile upfile, HttpServletRequest request) {
+
 		Map result = new HashMap();
-		
-		if(upfile!=null){ 
-            //如果文件大小不为0
-            if(upfile.getSize()>0){
-                //获得上传位置
-                //生成文件名
-                String filename=UUID.randomUUID().toString()+upfile.getOriginalFilename().substring(upfile.getOriginalFilename().lastIndexOf("."));
-                File tempFile=new File(uploadImageUrl_windows, filename);
-                if(tempFile.getParent().isEmpty()) {
-                	tempFile.mkdirs();
-                }
-                try {
-                    //保存文件
-                	upfile.transferTo(tempFile);
-                    //更新数据
-                	result.put("flag", true);
-                	result.put("photoSrc", filename);
-                	return result;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+
+		if (upfile != null) {
+			// 如果文件大小不为0
+			if (upfile.getSize() > 0) {
+
+				// 生成文件名
+				String filename = UUID.randomUUID().toString()
+						+ upfile.getOriginalFilename().substring(upfile.getOriginalFilename().lastIndexOf("."));
+				
+				File tempFile = new File(uploadImageUrl_windows, filename);
+				
+				if (tempFile.getParent().isEmpty()) {
+					tempFile.mkdirs();
+				}
+				
+				try {
+					// 保存文件
+					upfile.transferTo(tempFile);
+					// 更新数据
+					result.put("flag", true);
+					result.put("photoSrc", filename);
+					return result;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		result.put("flag", false);
-    	result.put("photoSrc", null);
+		result.put("photoSrc", null);
 		return result;
 	}
 

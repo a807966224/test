@@ -43,41 +43,23 @@ table td{text-align: center;}
 
 <script>
 	$(function(){
-		
-		$("#checkAll").click(function(){
-			if(this.checked){
-				$("input[name='id']").prop("checked","true"); 
-			}else{
-				$("input[name='id']").removeAttr("checked"); 
-			}
-		});
-		
-		$("input[name='id']").click(function(){
-			if(this.checked){
-				
-				var allSize = $("input[name='id']").length;
-				var checkedSize = $("input[name='id']:checkbox:checked").length;
-				if(allSize == checkedSize){
-					$("#checkAll").prop("checked","true"); 
-				}
-			}else{
-				$("#checkAll").removeAttr("checked"); 
-			} 
-		});
-		
-		$("input[id='delOpt']").click(function(){
-			$("#listForm").attr("action","<%=request.getContextPath()%>/dept/delete").submit();
-			$("#listForm").attr("action","");
-		});
-		
 		//初始化分页插件
 		initPagers('${pagers.totalPage}','${pagers.totalSize}','${pagers.currentPage}','${pagers.prefixRequest}')
 	});
 	function subgo(size,id){
 		if(size == 0){
-			window.location.href="<%=request.getContextPath()%>/dept/delete?id="+id;
+			window.location.href="<%=request.getContextPath()%>/dept/delete?skip=${dept.skip}&id="+id;
 		}else{
 			alert("部门下包含人员！请清空人员后删除该部门~");
+		}
+	}
+	
+	//保留页码
+	function toEdit(id,readOnly){
+		if(id){
+			window.location.href="<%=request.getContextPath()%>/dept/edit?skip=${dept.skip}&id="+id+"&readOnly="+readOnly;
+		}else{
+			window.location.href="<%=request.getContextPath()%>/dept/edit?skip="+${dept.skip};
 		}
 	}
 </script>
@@ -90,7 +72,6 @@ table td{text-align: center;}
        	  <table width="100%">
 			  <thead>
 				<tr>
-					<th><input type="checkbox" id="checkAll" ></th>
 	                <th>序号</th>
 	                <th>名称</th>
 	                <th>位置</th>
@@ -100,14 +81,13 @@ table td{text-align: center;}
 			  <tbody>
 			  		<c:forEach var="entity" items="${pagers.list}" varStatus="i">
 			  			<tr class="parent" id="row_0${i.count }" >
-			  				<td><input type="checkbox" name="id" value="${entity.id}"></td>
 			  				<td colspan="1">${i.count}</td>
 			  				<td colspan="1">${entity.name}</td>
 			  				<td colspan="1">${entity.location}</td>
 			  				<td colspan="2">
 			  					<a href="#" onclick="subgo('${fn:length(entity.empList)}','${entity.id}')">删除</a>
-			                    <a href="<c:url value="/dept/edit"/>?id=${entity.id}" >编辑</a>
-			                    <a href="<c:url value="/dept/edit"/>?id=${entity.id}&readOnly=true" >详情</a>
+			                    <a href="javascript:toEdit(${entity.id},'false')" >编辑</a>
+			                    <a href="javascript:toEdit(${entity.id},'true')" >详情</a>
 			  				</td>
 			  			</tr>
 		                <c:forEach var="emp" items="${entity.empList }" varStatus="k">
@@ -125,10 +105,13 @@ table td{text-align: center;}
         
         <p>
         	<a href="<c:url value="/"/>" ><input type='button' value='返回菜单'/></a>
-            <a href="<c:url value="/dept/edit"/>" ><input type='button' value='添加'/></a>
-            <input type="button" id="delOpt" value="批量删除" />
+            <a href="javascript:void(0);" ><input onclick="javascript:toEdit();" type='button' value='添加'/></a>
         </p>
+        
+        <!-- 分页插件渲染容器 start -->
         <div id="kkpager"></div>
+        <!-- 分页插件渲染容器 end -->
+        
     </form>
     </div>
 </body>

@@ -1,8 +1,6 @@
 package com.practice.test.backstage.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -13,7 +11,6 @@ import com.practice.test.backstage.beans.Dept;
 import com.practice.test.backstage.currency.PagerList;
 import com.practice.test.backstage.daos.DeptDao;
 import com.practice.test.backstage.service.DeptService;
-import com.practice.test.backstage.utils.StringUtils;
 
 
 /**

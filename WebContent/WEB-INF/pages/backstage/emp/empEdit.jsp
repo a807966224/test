@@ -56,11 +56,18 @@ $("#editForm").html5Validate(function() {
 <body>
     <div>
         <h2><span>新增人员</span></h2>
-        <form action="<c:url value="/emp/save" />" method="post">
+        <form id="editForm" action="<c:url value="/emp/save" />" method="post">
         	<input type="hidden" name="id" value="${bean.id }" />
         	<input type="hidden" name="photoSrc" id="photoSrc" value="${bean.photoSrc }" />
         	
-        	<div style="border: 1px solid grey;width: 200px;height: 200px;position: absolute;left: 22%;top: 24%;">
+        	<!-- 回收垃圾图片 -->
+        	<c:if test="${!empty bean.photoSrc}">
+        		<input type='hidden' name='tmpPhoto' value='${bean.photoSrc }' />
+        	</c:if>
+        	
+        	<!-- 以下提供上传图片的按钮以及图片预览地址，根据需求进行改动    -->
+        	<!-- code start -->
+        	<div style="border: 1px solid grey;width: 200px;height: 210px;position: absolute;left: 22%;top: 14%;">
                 <div style="text-align: center;padding: 10px;">
                     <a id="upload-target" >添加图片并上传</a>
                 </div>
@@ -80,6 +87,7 @@ $("#editForm").html5Validate(function() {
                 </div>
                 <div id="log"></div>
             </div>
+            <!-- code end -->
         	
 	        <fieldset>
 	            <legend>人员</legend>
@@ -129,10 +137,13 @@ $("#editForm").html5Validate(function() {
         var tmpContent = "";
         
         var uploader = new Q.Uploader({
+        	
             url: "<%=request.getContextPath()%>/emp/uploadPhoto",
+            
             target: document.getElementById("upload-target"),
+            
             view: boxView,
-            //auto: false,
+            
 			dataType: "json",
 			
 			upName: "upfile",
@@ -150,14 +161,19 @@ $("#editForm").html5Validate(function() {
             on: {
                 //添加之前触发
                 add: function (task) {
+                	
                     if (task.disabled) return alert("允许上传的文件格式为：" + this.ops.allows);
                     //保证上传唯一图片   
                     tmpContent = $("#upload-image-view").html();
+                    
                     $("#upload-image-view").html("");
+                    
                 },
                 //图片预览后触发
                 preview: function (data) {
+                	
                 	$("#photoSrc").val(data.src);
+                	
                     //log(data.task.name + " : " + data.src);
                 },
                 complete: function(){
@@ -172,18 +188,23 @@ $("#editForm").html5Validate(function() {
                     log(data.task.name + " : 已压缩！");
                 }
             },
-            UI:{
-                over: function(result){
-                	var map = eval("("+result.response+")");
-                	if(map.flag){
-                		$("#photoSrc").val(map.photoSrc);
-                	}
-                }
-            }
+            	//上传完成后，回调函数重置图片地址
+	            UI:{
+	                over: function(result){
+	                	
+	                	var map = eval("("+result.response+")");
+	                	
+	                	if(map.flag){
+	                		
+	                		$("#photoSrc").val(map.photoSrc);
+	                		
+	                		//回收垃圾图片
+	                		$("#editForm").append("<input type='hidden' name='tmpPhoto' value='"+map.photoSrc+"' />");
+	                	}
+	                	
+	                }
+	            }
         });
-
-        //将auto配置为false以手动上传
-        //uploader.start();
     </script>
     
 </body>

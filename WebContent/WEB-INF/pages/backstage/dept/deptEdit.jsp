@@ -56,7 +56,7 @@ $("#editForm").html5Validate(function() {
         </form>
         
         <p>
-            <a href="<c:url value="/dept/deptList" />">返回列表</a>
+            <a href="<c:url value="/dept/deptList?skip=${bean.skip }" />">返回列表</a>
         </p>
     </div>
 </body>

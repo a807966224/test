@@ -35,12 +35,11 @@ public class DeptAction {
 	 * @return
 	 */
 	@RequestMapping("/deptList")
-	public String toDept(Model model, Dept dept,@RequestParam(required = false, defaultValue = "1") Integer skip,
-			@RequestParam(required = false, defaultValue = "2") Integer size,HttpServletRequest request) {
+	public String toDept(Model model, Dept dept,HttpServletRequest request) {
 		
 		
 		//获取查询数据数量
-		model.addAttribute("pagers", deptService.getDeptForPage(skip, size, request.getRequestURI()));
+		model.addAttribute("pagers", deptService.getDeptForPage(dept.getSkip(), dept.getSize(), request.getRequestURI()));
 		
 		model.addAttribute("dept", dept);
 		
@@ -50,17 +49,18 @@ public class DeptAction {
 	@RequestMapping("/edit")
 	public String edit(Dept dept,Model model,@RequestParam(required=false) boolean readOnly) {
 		
+		Integer tmpSkip = dept.getSkip();
+		
 		//获取唯一数据
 		if(dept.getId() != null) {
 			dept = deptService.get(dept);
 		}
 		
+		dept.setSkip(tmpSkip);
 		//存放至封装类中去
 		model.addAttribute("bean", dept);
 		
 		model.addAttribute("readOnly", readOnly);
-		
-		//待添加      查询部门集合   放置在人员编辑界面
 		
 		return "backstage/dept/deptEdit";
 	}
@@ -68,21 +68,23 @@ public class DeptAction {
 	@RequestMapping("/save")
 	public String save(Dept dept,Model model) {
 		
+		Integer tmpSkip = dept.getSkip();
+		
 		if(dept.getId() == null) {
 			deptService.insert(dept);
 		}else {
 			deptService.update(dept);
 		}
 		
-		return "redirect:/dept/deptList";
+		return "redirect:/dept/deptList?skip="+tmpSkip;
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam(name = "id") Long[] ids) {
+	public String delete(@RequestParam(name = "id") Long[] ids,@RequestParam(name = "skip") Integer skip) {
 		
 		deptService.delete(ids);
 		
-		return "redirect:/dept/deptList";
+		return "redirect:/dept/deptList?skip="+skip;
 	}
 	
 }
