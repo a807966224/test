@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practice.test.backstage.beans.Dept;
+import com.practice.test.backstage.currency.BaseController;
 import com.practice.test.backstage.service.DeptService;
 
 /**
@@ -21,7 +22,7 @@ import com.practice.test.backstage.service.DeptService;
 // 注册到spring容器中
 @Controller
 @RequestMapping("/dept")
-public class DeptAction {
+public class DeptAction extends BaseController{
 
 	@Resource
 	DeptService deptService;

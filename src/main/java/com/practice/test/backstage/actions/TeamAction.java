@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practice.test.backstage.beans.Team;
+import com.practice.test.backstage.currency.BaseController;
+import com.practice.test.backstage.exceptions.ServiceException;
 import com.practice.test.backstage.service.TeamService;
 
 @Controller
 @RequestMapping("/team")
-public class TeamAction {
+public class TeamAction extends BaseController{
 	
 	@Resource
 	TeamService teamService;
 	
 	@RequestMapping("/teamList")
 	public String toTeam(Model model, Team team,HttpServletRequest request) {
-		
 		
 		//获取查询数据数量
 		model.addAttribute("pagers", teamService.getTeamForPage(team, team.getSkip(), team.getSize(), request.getRequestURI()));

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.practice.test.backstage.beans.Emp;
+import com.practice.test.backstage.currency.BaseController;
 import com.practice.test.backstage.service.DeptService;
 import com.practice.test.backstage.service.EmpService;
 
@@ -29,7 +30,7 @@ import com.practice.test.backstage.service.EmpService;
 // 注册到spring容器中
 @Controller
 @RequestMapping("/emp")
-public class EmpAction {
+public class EmpAction extends BaseController{
 
 	@Resource
 	EmpService empService;

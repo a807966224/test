@@ -1,6 +1,10 @@
 package com.practice.test.backstage.currency;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Date;
+
+import com.practice.test.backstage.utils.DateUtil;
 
 /**
  * 
@@ -12,6 +16,8 @@ public class BaseBean implements Serializable{
 	
 	
 	private Long id;
+	
+	private Date create_date;
 	
 	private Integer skip = 0;
 	private Integer size = 2;//每页容量
@@ -38,6 +44,14 @@ public class BaseBean implements Serializable{
 
 	public void setSize(Integer size) {
 		this.size = size;
+	}
+
+	public Date getCreate_date() {
+		return new Date();
+	}
+
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
 	}
 
 }

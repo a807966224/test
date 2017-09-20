@@ -45,9 +45,9 @@ public class DeptSql {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("insert into dept (name,location) ");
+		stringBuffer.append("insert into dept (name,location,create_date) ");
 		
-		stringBuffer.append(" values (#{dept.name},#{dept.location}) ");
+		stringBuffer.append(" values (#{dept.name},#{dept.location},#{dept.create_date}) ");
 		
 		return stringBuffer.toString();
 	}

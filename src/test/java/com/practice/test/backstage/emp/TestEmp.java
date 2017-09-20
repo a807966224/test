@@ -1,6 +1,8 @@
 package com.practice.test.backstage.emp;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.practice.test.backstage.daos.EmpDao;
+import com.practice.test.backstage.utils.DateUtil;
 import com.practice.test.backstage.utils.MyBatisUtil;
 import com.practice.test.backstage.utils.SqlSessionUtil;
 
@@ -50,8 +53,16 @@ public class TestEmp {
 	
 	@Test
 	public void getSqlSession() {
-		SqlSessionFactory sqlSessionFactory = SqlSessionUtil.getInstance();
-		System.out.println(sqlSessionFactory==null);
+//		SqlSessionFactory sqlSessionFactory = SqlSessionUtil.getInstance();
+//		System.out.println(sqlSessionFactory==null);
+		
+		
+		try {
+			Date date = DateUtil.parse(DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss SSS"), "yyyy-MM-dd HH:mm:ss SSS");
+			System.out.println(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 

@@ -8,17 +8,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.test.backstage.beans.Team;
+import com.practice.test.backstage.currency.AbstractBaseService;
+import com.practice.test.backstage.currency.BaseDao;
 import com.practice.test.backstage.currency.PagerList;
 import com.practice.test.backstage.daos.TeamDao;
 import com.practice.test.backstage.service.TeamService;
 
 @Transactional
 @Service
-public class TeamServiceImpl implements TeamService{
+public class TeamServiceImpl extends AbstractBaseService<Team> implements TeamService{
 
 	@Autowired
-	TeamDao teamDao;
-
+    private TeamDao teamDao;
+	
+	@Override
+	public BaseDao<Team> getDao() {
+		return this.teamDao;
+	}
+	
 	@Override
 	public PagerList<Team> getTeamForPage(Team team, Integer skip, Integer size, String prefixUrl) {
 		
@@ -54,4 +61,5 @@ public class TeamServiceImpl implements TeamService{
 		pars.put("ids", ids);
 		return teamDao.deleteBatch(pars);
 	}
+
 }

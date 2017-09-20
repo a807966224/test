@@ -26,7 +26,13 @@
 	    <property name="driverClassName" value="${mysql.driver}" />       
 	    <property name="url" value="${mysql.url}" />       
 	    <property name="username" value="${mysql.uid}" />       
-	    <property name="password" value="${mysql.password}" />       
+	    <property name="password" value="${mysql.password}" />
+	    
+	    <property name="initialSize" value="10" />
+		<property name="maxTotal" value="100" />
+		<property name="maxIdle" value="100" />
+		<property name="maxWaitMillis" value="-1" />
+               
 	</bean>
 
     <!--3 会话工厂bean sqlSessionFactoryBean -->

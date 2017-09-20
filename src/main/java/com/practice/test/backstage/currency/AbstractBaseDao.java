@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @param <T>
  */
-public abstract class AbstractBaseDao<T extends BaseBean> extends SqlSessionDaoSupport implements BaseDao<T> {
+public abstract class AbstractBaseDao<T> extends SqlSessionDaoSupport implements BaseDao<T> {
 
 	//根据条件查询数据集合
     private static final String SQL_SELECT_ALL = "selectAll";
@@ -33,17 +33,13 @@ public abstract class AbstractBaseDao<T extends BaseBean> extends SqlSessionDaoS
     //根据主键查询唯一数据
 	private static final String SQL_GET = "get";
 	
-	@Override
-	@Autowired
-	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-	    super.setSqlSessionFactory(sqlSessionFactory);
-	}
-	
-	@Override
-	@Autowired
-	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-	    super.setSqlSessionTemplate(sqlSessionTemplate);
-	}
+	protected Class<T> modelClass;
+    private String namespace;
+
+    public AbstractBaseDao(Class<T> modelClass){
+        this.modelClass = modelClass;
+        this.namespace = modelClass.getName();
+    }
 	
 	/**
 	 * 获取xml完全限定名
@@ -52,7 +48,9 @@ public abstract class AbstractBaseDao<T extends BaseBean> extends SqlSessionDaoS
 	 */
 	public String getStatement(String sqlId) {
 		
-		String name = this.getClass().getName();//获取类名（包路径+类名）
+		//String name = this.getClass().getName();
+		
+		String name = namespace;
 		
 		StringBuffer stringBuffer = new StringBuffer();
 		
@@ -96,5 +94,16 @@ public abstract class AbstractBaseDao<T extends BaseBean> extends SqlSessionDaoS
 		return getSqlSession().delete(SQL_DELETE_BATCH, paramters);
 	}
 
+	@Override
+	@Autowired
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+	    super.setSqlSessionFactory(sqlSessionFactory);
+	}
+	
+	@Override
+	@Autowired
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+	    super.setSqlSessionTemplate(sqlSessionTemplate);
+	}
 	
 }

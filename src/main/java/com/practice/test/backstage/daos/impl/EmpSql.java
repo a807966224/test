@@ -55,8 +55,6 @@ public class EmpSql {
 			stringBuffer.append(" and emp.deptId = #{emp.deptId}");
 		}
 		
-		stringBuffer.append(" order by id desc ");
-		
 		return stringBuffer.toString();
 	}
 	
@@ -75,9 +73,9 @@ public class EmpSql {
 		
 		StringBuffer stringBuffer = new StringBuffer("");
 		
-		stringBuffer.append("insert into emp (name,sex,age,deptId,photoSrc) ");
+		stringBuffer.append("insert into emp (name,sex,age,deptId,photoSrc,create_date) ");
 		
-		stringBuffer.append(" values (#{emp.name},#{emp.sex},#{emp.age},#{emp.deptId},#{emp.photoSrc}) ");
+		stringBuffer.append(" values (#{emp.name},#{emp.sex},#{emp.age},#{emp.deptId},#{emp.photoSrc},#{emp.create_date}) ");
 		
 		return stringBuffer.toString();
 	}
